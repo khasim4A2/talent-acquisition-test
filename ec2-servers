@@ -1,0 +1,44 @@
+---
+- name: Create an EC2 instance
+  hosts: localhost
+  gather_fact: False
+
+  vars:
+      region: US West (N. California)
+      instance_type: t2.micro
+      ami: ami-0ad16744583f21877   #Ubuntu Server 16.04 LTS
+      keypair: californiakey  # perm file name
+
+  tasks:
+
+    -name: Create an EC2 instance
+    ec2:
+       key_name: "{{ keypair }}"
+       group: californiakey #security group name
+       instance_type: "{{ instance_type }}"
+       image: "{{ ami }}"
+       wait: true
+       region: "{{ region }}"
+       count: 1
+       count_tag:
+          Name: MSR-test-Instance-1
+       instance_tags:
+          Name: MSR-test-Instance-1
+       vpc_subnet_id: subnet-4cd7f417
+       assign_public_ip: yes
+    register: ec2
+    ec2:
+       key_name: "{{ keypair }}"
+       group: californiakey #security group name
+       instance_type: "{{ instance_type }}"
+       image: "{{ ami }}"
+       wait: true
+       region: "{{ region }}"
+       count: 1
+       count_tag:
+          Name: MSR-test-Instance-1
+       instance_tags:
+          Name: MSR-test-Instance-1
+       vpc_subnet_id: subnet-4cd7f417
+       assign_public_ip: yes
+    register: ec2
