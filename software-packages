@@ -1,0 +1,23 @@
+---
+-hosts: ec2-servers
+ become: yes
+
+ tasks:
+
+   -name: Ensure NVM – Version 0.33.2 installed
+    yum: name=NVM state=present
+
+   -name: Ensure Node-8.12.0 installed
+    yum: name=Node state=present
+
+   -name: Ensure Docker – 18.06 installed
+    yum: name=docker state=present
+
+   -name: Ensure Docker Compose – 1.13 installed
+    yum: name=docker-compose state=present
+
+   -name: Ensure openssl installed
+    yum: name=openssl state=present
+
+   -name: Ensure Git installed
+    yum: name=git state=present
